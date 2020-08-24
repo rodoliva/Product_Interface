@@ -33,7 +33,7 @@ The interface can:
 
 - Create new products
 - Update the variables
-- check the uniqueness of the id
+- Check the uniqueness of the id
 - Delete products
 - Create and update products through a file
 - Undo an Redo actions
