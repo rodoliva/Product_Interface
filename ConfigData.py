@@ -59,10 +59,9 @@ class BaseData():
     def id(self, data):
             self.__id = data
 
-
     def update(self, mod, data):
         # mod = id, name
-        if mod == 'id' and check_id(data, self.min, self.max) and check_dup_id(data):
+        if mod == 'id':
             self.id = data
         elif mod == 'name' and notemp(data):
             self.name = data
