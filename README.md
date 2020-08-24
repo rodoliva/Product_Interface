@@ -1,6 +1,6 @@
 # Product Interface
 
-This is a smal interface that came from one of my personal proyects, a pricing model.
+This is a simple little interface that came from one of my personal projects, a pricing model.
 
 ![Screen record Gif](https://github.com/rodoliva/Product_Interface/blob/master/Others/screenprodinf.gif)
 
@@ -16,7 +16,7 @@ This is a smal interface that came from one of my personal proyects, a pricing m
 
 ### Setup
 
-> update pickle:
+> update pickle.
 
 > update or install PyQt5:
 
@@ -26,3 +26,15 @@ sudo apt-get install python3-pyqt5
 sudo apt-get install pyqt5-dev-tools
 sudo apt-get install qttools5-dev-tools
 ```
+
+## Features
+
+The interface can:
+
+- Create new products
+- Update the variables
+- check the uniqueness of the id
+- Delete products
+- Create and update products through a file
+- Undo an Redo actions
+- Save changes to a file and backup of all saved changes
