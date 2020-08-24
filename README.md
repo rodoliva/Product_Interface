@@ -1,2 +1,4 @@
-# Product_Interface
-Example of a part from the Price project
+# Product Interface
+
+This is a smal interface that came from one of my personal proyects, a pricing model.
+
