@@ -397,7 +397,7 @@ class Ui_productWin(object):
                 if bd.check_id(int(dataid), bd.min_prod_id, bd.max_prod_id) and bd.check_dup_id(int(dataid), self.li):
                     prod_new = bd.Product(int(dataid), dataname, datashort, datatype, dataref)
                     self.li.append(prod_new)
-                    self.manager.do_new_action(self.clone_li())  # for undo and redo
+                    self.manager.new_action(self.clone_li())  # for undo and redo
                     QtWidgets.QMessageBox().about(self.prodwin, 'All good', f'Id checked and new product created')
                     self.refresh_table()
                 else:
@@ -447,29 +447,29 @@ class Ui_productWin(object):
                     if text == 'ID':
                         if bd.check_id(int(data), bd.min_prod_id, bd.max_prod_id) and bd.check_dup_id(int(data), self.li):
                             prod.id = int(data)
-                            self.manager.do_new_action(self.clone_li())  # for undo and redo
+                            self.manager.new_action(self.clone_li())  # for undo and redo
                             QtWidgets.QMessageBox().about(self.prodwin, 'All good', f'Id checked and product updated')
                             self.refresh_table()
                         else:
                             QtWidgets.QMessageBox().about(self.prodwin, 'Warning', f'Need a ID between {bd.min_prod_id} and {bd.max_prod_id}')
                     elif text == 'Name' and bd.notemp(data):
                         prod.name = data
-                        self.manager.do_new_action(self.clone_li())  # for undo and redo
+                        self.manager.new_action(self.clone_li())  # for undo and redo
                         QtWidgets.QMessageBox().about(self.prodwin, 'All good', f'Id checked and product updated')
                         self.refresh_table()
                     elif text == 'Short Name' and bd.notemp(data):
                         prod.short_name = data
-                        self.manager.do_new_action(self.clone_li())  # for undo and redo
+                        self.manager.new_action(self.clone_li())  # for undo and redo
                         QtWidgets.QMessageBox().about(self.prodwin, 'All good', f'Id checked and product updated')
                         self.refresh_table()
                     elif text == 'Product Type' and bd.notemp(data):
                         prod.prod_type = data
-                        self.manager.do_new_action(self.clone_li())  # for undo and redo
+                        self.manager.new_action(self.clone_li())  # for undo and redo
                         QtWidgets.QMessageBox().about(self.prodwin, 'All good', f'Id checked and product updated')
                         self.refresh_table()
                     elif text == 'Reference Price' and bd.notemp(data):
                         prod.reference_price = data
-                        self.manager.do_new_action(self.clone_li())  # for undo and redo
+                        self.manager.new_action(self.clone_li())  # for undo and redo
                         QtWidgets.QMessageBox().about(self.prodwin, 'All good', f'Id checked and product updated')
                         self.refresh_table()
                     else:
@@ -493,7 +493,7 @@ class Ui_productWin(object):
             if response and not bd.check_dup_id(int(data), self.li):
                 ob = self.search(int(data))
                 self.li.remove(ob)
-                self.manager.do_new_action(self.clone_li()) #for undo and redo
+                self.manager.new_action(self.clone_li()) #for undo and redo
                 QtWidgets.QMessageBox().about(self.prodwin, 'All good', f'Product Deleted')
                 self.refresh_table()
             else:
@@ -531,11 +531,11 @@ class Ui_productWin(object):
                         if bd.check_dup_id(id, self.li):
                             prod_new = bd.Product(id, name, short_name, prod_type, reference_price)
                             self.li.append(prod_new)
-                            self.manager.do_new_action(self.clone_li())  # for undo and redo
+                            self.manager.new_action(self.clone_li())  # for undo and redo
                         else:
                             pr = self.search(id)
                             pr.name, pr.short_name, pr.prod_type, pr.reference_price = name, short_name, prod_type, reference_price
-                            self.manager.do_new_action(self.clone_li())  # for undo and redo
+                            self.manager.new_action(self.clone_li())  # for undo and redo
                     QtWidgets.QMessageBox().about(self.prodwin, 'All good', f'File loaded')
                     self.refresh_table()
                 else:

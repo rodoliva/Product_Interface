@@ -89,57 +89,57 @@ class Product(BaseData):
             elif mod == 'reference_price':
                 self.reference_price = data
 
-class UndoRedoManager(object):
+class UndoRedoManager():
 
     def __init__(self, li):
         self.undo_list = []
         self.undo_list.append(li)
         self.redo_list = []
 
-    def push_undo_command(self, action):  # function for do_new_action function
+    def add_undo(self, action):
+        #Add the action to the undo list.
         self.undo_list.append(action)
 
-    def pop_undo_command(self):  # function for undo function
-        if not len(self.undo_list) <= 1:
+    def add_redo(self, action):
+        #Add the action to the redo list
+        self.redo_list.append(action)
+
+    def delete_undo(self):
+        #Remove the last action from the undo list and return it
+        if not len(self.undo_list) <=1:
             last_undo = self.undo_list.pop()
             return last_undo
 
-    def push_redo_command(self, action):  # function for undo function
-        self.redo_list.append(action)
-
-    def pop_redo_command(self):
+    def delete_redo(self):
+        #Remove the last action from the redo list and return it
         if not len(self.redo_list) == 0:
-            last_redo = self.redo_list.pop()  # function for undo function
+            last_redo = self.redo_list.pop()
             return last_redo
 
-    def do_new_action(self, action):  # use this function for each action
-        self.redo_list = []  # clear redo with every new command
-        self.push_undo_command(action)  # add new element
+    def new_action(self, action):
+        """Use this function for each action.
+        This clear redo list with every new action and
+        add new element in the undo list"""
+        self.redo_list = []
+        self.add_undo(action)
 
-    def undo(self):  # function undo
-        if not len(self.undo_list) <= 1:
-            action = self.pop_undo_command()
-            self.push_redo_command(action)
-            return self.clone_li(self.undo_list[len(self.undo_list) - 1])
+    def undo(self):
+        #Undo the last actions
+        if not len(self.undo_list) <=1:
+            action = self.delete_undo()
+            self.add_redo(action)
+            return self.undo_list[len(self.undo_list)-1]
         else:
-            return self.clone_li(self.undo_list[0])
+            return self.undo_list[0]
 
-    def redo(self):  # function redo
+    def redo(self):
+        #Redo the last actions
         if not len(self.redo_list) == 0:
-            action = self.pop_redo_command()
-            self.push_undo_command(action)
-            return self.clone_li(action)
+            action = self.delete_redo()
+            self.add_undo(action)
+            return action
         else:
-            return self.clone_li(self.undo_list[len(self.undo_list) - 1])
-
-
-    def clone_li(self, li):
-        auxli = []
-        if not li == []:
-            copyli = copy.deepcopy(li)
-            for prod in copyli:
-                auxli.append(copy.deepcopy(prod))
-            return auxli
+            return self.undo_list[len(self.undo_list)-1]
 
 def openerli(directory):
     li = []
